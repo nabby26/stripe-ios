@@ -160,6 +160,27 @@ static NSString *const STPSDKVersion = @"9.3.0";
  */
 - (void)retrieveSourceWithId:(NSString *)identifier clientSecret:(NSString *)secret completion:(STPSourceCompletionBlock)completion;
 
+/**
+ *  Starts polling the Source object with the given ID. For payment methods that require
+ *  additional customer action (e.g. authorizing a payment with their bank), polling
+ *  allows you to determine if the action was successful. The provided callback will be
+ *  called as soon as the source is retrieved, and every time its status is updated.
+ *  Polling will end if the source's status is one of `chargeable`, `canceled`, or
+ *  `consumed`.
+ *
+ *  @param identifier  The identifier of the source to be retrieved. Cannot be nil.
+ *  @param secret      The client secret of the source. Cannot be nil.
+ *  @param completion  The callback to run with the returned Source object, or an error.
+ */
+- (void)startPollingSourceWithId:(NSString *)identifier clientSecret:(NSString *)secret completion:(STPSourceCompletionBlock)completion;
+
+/**
+ *  Stops polling the Source object with the given ID.
+ *
+ *  @param identifier  The identifier of the source to be retrieved. Cannot be nil.
+ */
+- (void)stopPollingSourceWithId:(NSString *)identifier;
+
 @end
 
 #pragma mark - Deprecated Methods
