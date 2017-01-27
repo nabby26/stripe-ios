@@ -12,6 +12,7 @@
 
 #import "NSURLComponents+Stripe.h"
 #import "STPBlocks.h"
+#import "STPSource.h"
 #import "STPURLCallbackHandler.h"
 
 @interface STPRedirectClient () <SFSafariViewControllerDelegate, STPURLCallbackListener>
@@ -48,8 +49,8 @@
     self.completion = completion;
 
     // TODO: STPSource should provide these as named typed NSURLs instead of dictionary lookups
-    NSURL *redirectURL = [NSURL URLWithString:source.redirect[@"url"]];
-    NSURL *returnURL = [NSURL URLWithString:source.redirect[@"return_url"]];
+    NSURL *redirectURL = source.redirect.url;
+    NSURL *returnURL = source.redirect.returnURL;
 
     // TODO: validate return URL
 
@@ -79,15 +80,15 @@
 - (BOOL)redirectAllowedForSource:(STPSource *)source {
     // TODO: verify that they are valid URLs and that return url is set up correctly
     return ((source.flow == STPSourceFlowRedirect)
-            && source.redirect[@"url"] != nil
-            && source.redirect[@"return_url"] != nil);
+            && source.redirect.url != nil
+            && source.redirect.returnURL != nil);
 }
 
 - (void)cleanupAndCompleteRedirectWithError:(nullable NSError *)error {
     STPSource *source = self.inProgressAuthSource;
 
     [[STPURLCallbackHandler shared] unregisterListener:self
-                                                forURL:[NSURL URLWithString:source.redirect[@"return_url"]]];
+                                                forURL:source.redirect.returnURL];
 
 
     if (self.presentedViewController) {

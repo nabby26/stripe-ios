@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "STPAPIResponseDecodable.h"
 #import "STPSourceRepresenting.h"
+#import "STPSourceOwner.h"
+#import "STPSourceReceiver.h"
+#import "STPSourceRedirect.h"
+#import "STPSourceVerification.h"
 
 /**
  *  Authentication flows for a Source
