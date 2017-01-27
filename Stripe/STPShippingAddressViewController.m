@@ -350,13 +350,15 @@
     return self.addressHeaderView;
 }
 
-- (void)useBillingAddress:(UIButton *)sender {
+- (void)useBillingAddress:(__unused UIButton *)sender {
+    [self.tableView beginUpdates];
     self.addressViewModel.address = self.billingAddress;
     self.hasUsedBillingAddress = YES;
     [[self firstEmptyField] becomeFirstResponder];
     [UIView animateWithDuration:0.2f animations:^{
-        sender.alpha = 0;
+        self.addressHeaderView.buttonHidden = YES;
     }];
+    [self.tableView endUpdates];
 }
 
 - (NSString *)titleForShippingType:(STPShippingType)type {

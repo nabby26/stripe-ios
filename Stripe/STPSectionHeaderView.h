@@ -14,5 +14,6 @@
 @property(nonatomic, nonnull)STPTheme *theme;
 @property(nonatomic, nullable)NSString *title;
 @property(nonatomic, nullable, weak)UIButton *button;
+@property(nonatomic)BOOL buttonHidden;
 
 @end

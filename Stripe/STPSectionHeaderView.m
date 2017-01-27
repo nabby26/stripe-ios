@@ -66,9 +66,14 @@
     [self setNeedsLayout];
 }
 
+- (void)setButtonHidden:(BOOL)buttonHidden {
+    _buttonHidden = buttonHidden;
+    self.button.hidden = buttonHidden;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (self.button.alpha == 0.f) {
+    if (self.buttonHidden) {
         self.label.frame = self.bounds;
     } else {
         CGFloat halfWidth = self.bounds.size.width/2;
@@ -80,7 +85,7 @@
 
 - (CGFloat)heightThatFits:(CGSize)size {
     CGFloat labelPadding = 16;
-    if (self.button.alpha == 0.f) {
+    if (self.buttonHidden) {
         CGFloat labelHeight = [self.label sizeThatFits:size].height;
         return labelHeight + labelPadding;
     } else {

@@ -676,13 +676,15 @@ typedef NS_ENUM(NSUInteger, STPPaymentCardSection) {
     }
 }
 
-- (void)useShippingAddress:(UIButton *)sender {
+- (void)useShippingAddress:(__unused UIButton *)sender {
+    [self.tableView beginUpdates];
     self.addressViewModel.address = self.shippingAddress;
     self.hasUsedShippingAddress = YES;
     [[self firstEmptyField] becomeFirstResponder];
     [UIView animateWithDuration:0.2f animations:^{
-        sender.alpha = 0;
+        self.addressHeaderView.buttonHidden = YES;
     }];
+    [self.tableView endUpdates];
 }
 
 @end
