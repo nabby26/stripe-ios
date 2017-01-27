@@ -68,7 +68,7 @@
 
 - (void)setButtonHidden:(BOOL)buttonHidden {
     _buttonHidden = buttonHidden;
-    self.button.hidden = buttonHidden;
+    self.button.alpha = buttonHidden ? 0 : 1;
 }
 
 - (void)layoutSubviews {
