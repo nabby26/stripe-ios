@@ -27,11 +27,11 @@
     request.HTTPBody = postData;
     
     [[apiClient.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable body, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        [STPAPIRequest parseResponse:response
-                                body:body
-                               error:error
-                          serializer:serializer
-                          completion:completion];
+        [[self class] parseResponse:response
+                               body:body
+                              error:error
+                         serializer:serializer
+                         completion:completion];
     }] resume];
 
 }
@@ -48,11 +48,11 @@
     request.HTTPMethod = @"GET";
 
     [[apiClient.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable body, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        [STPAPIRequest parseResponse:response
-                                body:body
-                               error:error
-                          serializer:serializer
-                          completion:completion];
+        [[self class] parseResponse:response
+                               body:body
+                              error:error
+                         serializer:serializer
+                         completion:completion];
     }] resume];
     
 }

@@ -234,7 +234,7 @@ FAUXPAS_IGNORED_IN_FILE(APIAvailability)
         return nil;
     }
 
-    STPAddress *address = [STPAddress new];
+    STPAddress *address = [self new];
     address.allResponseFields = dict;
     address.city = dict[@"city"];
     address.country = dict[@"country"];

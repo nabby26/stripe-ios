@@ -47,7 +47,7 @@
     STPSourceVerification *verification = [self new];
     verification.allResponseFields = dict;
     verification.attemptsRemaining = dict[@"attempts_remaining"];
-    verification.status = [STPSourceVerification statusFromString:dict[@"status"]];
+    verification.status = [self statusFromString:dict[@"status"]];
     return verification;
 }
 

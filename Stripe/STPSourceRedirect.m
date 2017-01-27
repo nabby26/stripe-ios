@@ -48,7 +48,7 @@
     STPSourceRedirect *redirect = [self new];
     redirect.allResponseFields = dict;
     redirect.returnURL = [NSURL URLWithString:dict[@"return_url"]];
-    redirect.status = [STPSourceRedirect statusFromString:dict[@"status"]];
+    redirect.status = [self statusFromString:dict[@"status"]];
     redirect.url = [NSURL URLWithString:dict[@"url"]];
     return redirect;
 }

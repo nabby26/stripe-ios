@@ -26,7 +26,7 @@
                                            name:(NSString *)name
                                       returnURL:(NSString *)returnURL
                             statementDescriptor:(nullable NSString *)statementDescriptor {
-    STPSourceParams *params = [STPSourceParams new];
+    STPSourceParams *params = [self new];
     params.type = @"bancontact";
     params.amount = @(amount);
     params.currency = @"eur"; // Bancontact must always use eur
@@ -45,7 +45,7 @@
 + (STPSourceParams *)bitcoinParamsWithAmount:(NSUInteger)amount
                                     currency:(NSString *)currency
                                        email:(NSString *)email {
-    STPSourceParams *params = [STPSourceParams new];
+    STPSourceParams *params = [self new];
     params.type = @"bitcoin";
     params.amount = @(amount);
     params.currency = currency;
@@ -54,7 +54,7 @@
 }
 
 + (STPSourceParams *)cardParamsWithCard:(STPCardParams *)card {
-    STPSourceParams *params = [STPSourceParams new];
+    STPSourceParams *params = [self new];
     params.type = @"card";
     NSDictionary *keyPairs = [STPFormEncoder keyPairDictionaryForObject:card];
     NSMutableDictionary *cardDict = [NSMutableDictionary dictionary];
@@ -73,7 +73,7 @@
                                                               @"address_country": @"country",
                                                               };
     for (NSString *key in [addressKeyMapping allKeys]) {
-        NSString *newKey = [addressKeyMapping objectForKey:key];
+        NSString *newKey = addressKeyMapping[key];
         addressDict[newKey] = keyPairs[key];
     }
     params.owner = @{ @"address": addressDict };
@@ -84,7 +84,7 @@
                                         name:(NSString *)name
                                    returnURL:(NSString *)returnURL
                          statementDescriptor:(nullable NSString *)statementDescriptor {
-    STPSourceParams *params = [STPSourceParams new];
+    STPSourceParams *params = [self new];
     params.type = @"giropay";
     params.amount = @(amount);
     params.currency = @"eur"; // Giropay must always use eur
@@ -105,7 +105,7 @@
                                  returnURL:(NSString *)returnURL
                        statementDescriptor:(nullable NSString *)statementDescriptor
                                       bank:(nullable NSString *)bank {
-    STPSourceParams *params = [STPSourceParams new];
+    STPSourceParams *params = [self new];
     params.type = @"ideal";
     params.amount = @(amount);
     params.currency = @"eur"; // iDEAL must always use eur
@@ -124,7 +124,7 @@
                                           name:(NSString *)name
                                           iban:(NSString *)iban
                                        address:(NSDictionary<NSString *,NSString *>*)address {
-    STPSourceParams *params = [STPSourceParams new];
+    STPSourceParams *params = [self new];
     params.type = @"sepa_debit";
     params.amount = @(amount);
     params.currency = @"eur"; // SEPA Debit must always use eur
@@ -144,7 +144,7 @@
                                   returnURL:(NSString *)returnURL
                                     country:(NSString *)country
                         statementDescriptor:(nullable NSString *)statementDescriptor {
-    STPSourceParams *params = [STPSourceParams new];
+    STPSourceParams *params = [self new];
     params.type = @"sofort";
     params.amount = @(amount);
     params.currency = @"eur"; // sofort must always use eur
@@ -162,7 +162,7 @@
                                          currency:(NSString *)currency
                                         returnURL:(NSString *)returnURL
                                              card:(NSString *)card {
-    STPSourceParams *params = [STPSourceParams new];
+    STPSourceParams *params = [self new];
     params.type = @"three_d_secure";
     params.amount = @(amount);
     params.currency = currency;
